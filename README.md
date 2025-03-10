@@ -2,15 +2,47 @@
 
 This repository contains Python and C++ implementations of various classical and modern cryptographic ciphers. These ciphers demonstrate fundamental encryption techniques and serve as a foundation for understanding modern cryptography.
 
-## Implemented Ciphers
+# Implemented Ciphers
 
-- **Caesar Cipher** - A simple substitution cipher that shifts characters by a fixed number of positions in the alphabet.
-- **Monoalphabetic Cipher** - A substitution cipher where each letter in the plaintext is replaced with a corresponding letter from a fixed shuffled alphabet.
-- **Playfair Cipher** - A digraph substitution cipher that encrypts pairs of letters using a 5x5 matrix.
-- **Hill Cipher** - A polygraphic substitution cipher based on matrix multiplication.
-- **Vigenère Cipher** - A polyalphabetic substitution cipher that encrypts text using a repeating keyword-based shifting technique.
-- **Feistel Cipher** - A symmetric encryption algorithm that splits plaintext into two halves and processes them through multiple rounds using a round function, key, and XOR operations. It forms the basis of many modern block ciphers like DES.
-- **DES (Data Encryption Standard)** - A symmetric block cipher that encrypts data using a series of complex permutations and substitutions.
+## **1. Caesar Cipher**
+The Caesar cipher is a simple substitution cipher that shifts characters by a fixed number of positions in the alphabet. For example, with a shift of 3, 'A' becomes 'D', 'B' becomes 'E', and so on. The decryption process reverses this shift. While easy to implement, it is highly vulnerable to frequency analysis due to its predictable shifting pattern.
+
+## **2. Monoalphabetic Cipher**
+A monoalphabetic cipher replaces each letter in the plaintext with a corresponding letter from a fixed, shuffled alphabet. Unlike the Caesar cipher, where the shift is uniform, the mapping in a monoalphabetic cipher is arbitrary, making it slightly more secure. However, it remains vulnerable to frequency analysis, as common letters in the plaintext still appear frequently in the ciphertext.
+
+## **3. Playfair Cipher**
+The Playfair cipher encrypts pairs of letters (digraphs) using a 5x5 matrix constructed from a keyword. If a pair contains the same letter, a filler letter (such as 'X') is inserted. The encryption follows these rules:
+- If the letters appear in the same row of the matrix, they are replaced by the letters to their right (wrapping around if necessary).
+- If the letters appear in the same column, they are replaced by the letters below them.
+- Otherwise, they are replaced by the letters at the opposite corners of the rectangle they form in the matrix.
+The Playfair cipher provides better security than simple substitution ciphers but is still susceptible to frequency analysis if enough ciphertext is available.
+
+## **4. Hill Cipher**
+The Hill cipher is a polygraphic substitution cipher that encrypts blocks of letters using matrix multiplication. A key matrix is used to transform a block of plaintext letters into ciphertext. The decryption process involves computing the inverse of the key matrix and applying it to the ciphertext blocks. This cipher is resistant to simple frequency analysis but can be broken if an attacker gains knowledge of the key matrix or sufficient plaintext-ciphertext pairs.
+
+## **5. Vigenère Cipher**
+The Vigenère cipher is a polyalphabetic substitution cipher that uses a repeating keyword to determine the shift for each letter in the plaintext. The encryption process involves:
+- Aligning the keyword with the plaintext.
+- Shifting each letter of the plaintext based on the corresponding letter in the keyword.
+- Wrapping around if the keyword is shorter than the plaintext.
+Decryption is performed by shifting in the opposite direction using the same keyword. While the Vigenère cipher overcomes some weaknesses of the Caesar cipher, it can still be broken using frequency analysis techniques like Kasiski examination.
+
+## **6. Feistel Cipher**
+A Feistel cipher is a symmetric encryption algorithm that splits the plaintext into two halves and processes them through multiple rounds. Each round consists of:
+- Applying a round function to one half of the data using a subkey.
+- XOR-ing the result with the other half.
+- Swapping the halves before the next round.
+This structure allows for easy encryption and decryption by reversing the order of subkeys. Many modern ciphers, including DES, are based on the Feistel structure.
+
+## **7. DES (Data Encryption Standard)**
+DES is a symmetric block cipher that encrypts data in 64-bit blocks using a 56-bit key. It operates through 16 rounds of Feistel transformations, each involving substitution and permutation functions. Key expansion is used to generate a different subkey for each round. DES was widely used for decades but is now considered insecure due to its relatively short key length, making it vulnerable to brute-force attacks.
+
+## **8. RSA (Rivest-Shamir-Adleman)**
+RSA is an asymmetric encryption algorithm that relies on the mathematical properties of prime factorization. It involves three key steps:
+- **Key Generation:** Two large prime numbers are selected, and their product forms the modulus. A public key exponent is chosen, and a private key exponent is computed based on the totient function.
+- **Encryption:** The plaintext message is raised to the power of the public key exponent and taken modulo the product of the primes.
+- **Decryption:** The ciphertext is raised to the power of the private key exponent and taken modulo the product of the primes.
+RSA provides strong security for secure communications, digital signatures, and key exchange protocols. Its security relies on the difficulty of factoring large numbers, making it resistant to brute-force attacks.
 
 ## Prerequisites
 
@@ -76,6 +108,11 @@ python3 fiestal.py
 #### **DES (Data Encryption Standard)**
 ```bash
 python3 des.py
+```
+
+#### **RSA**
+```bash
+python3 rsa.py
 ```
 
 Follow the on-screen instructions to encrypt or decrypt messages using the respective cipher.
