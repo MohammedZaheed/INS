@@ -44,6 +44,28 @@ RSA is an asymmetric encryption algorithm that relies on the mathematical proper
 - **Decryption:** The ciphertext is raised to the power of the private key exponent and taken modulo the product of the primes.
 RSA provides strong security for secure communications, digital signatures, and key exchange protocols. Its security relies on the difficulty of factoring large numbers, making it resistant to brute-force attacks.
 
+## **9. Diffie-Hellman**
+The Diffie-Hellman key exchange protocol allows two parties to securely establish a shared secret key over an insecure channel. It is based on the difficulty of computing discrete logarithms in a finite field.
+
+The process involves:
+- Selecting a large prime number and a primitive root modulo that prime.
+- Both parties choose private keys and compute their corresponding public keys.
+- They exchange public keys and compute the shared secret by raising the received public key to the power of their private key modulo the prime.
+
+The resulting shared key is identical for both parties and can be used for symmetric encryption. While the original Diffie-Hellman is vulnerable to man-in-the-middle attacks if not authenticated, it forms the basis for many secure communication protocols.
+
+## **10. Elliptic Curve Cryptography (ECC)**
+Elliptic Curve Cryptography (ECC) is an asymmetric encryption algorithm based on the algebraic structure of elliptic curves over finite fields. Each user generates a private key (a random number) and computes their public key by multiplying this private key with a predefined point on the elliptic curve. The security of ECC lies in the difficulty of the Elliptic Curve Discrete Logarithm Problem (ECDLP), making it secure with smaller key sizes compared to RSA.
+
+In ECC-based key exchange:
+- Both sender and receiver generate their private and public keys.
+- An encryption key is derived using a combination of their private key and the other party's public key.
+- This shared secret key can then be used for secure communication.
+
+ECC is widely used in modern cryptography for securing communications due to its efficiency and strong security guarantees.
+
+
+
 ## Prerequisites
 
 Ensure you have the necessary environment set up for running Python and C++ programs.
@@ -113,6 +135,16 @@ python3 des.py
 #### **RSA**
 ```bash
 python3 rsa.py
+```
+
+#### **Diffie Hellman**
+```bash
+python3 diffiehellman.py
+```
+
+#### **ECC**
+```bash
+python3 ecc.py
 ```
 
 Follow the on-screen instructions to encrypt or decrypt messages using the respective cipher.
